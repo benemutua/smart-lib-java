@@ -1,0 +1,131 @@
+-- MariaDB dump 10.19  Distrib 10.4.18-MariaDB, for Win64 (AMD64)
+--
+-- Host: localhost    Database: library
+-- ------------------------------------------------------
+-- Server version	10.4.18-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `library`
+--
+
+/*!40000 DROP DATABASE IF EXISTS `library`*/;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `library` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `library`;
+
+--
+-- Table structure for table `books`
+--
+
+DROP TABLE IF EXISTS `books`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `books` (
+  `serial_no` varchar(50) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `author` varchar(200) NOT NULL,
+  `publisher` varchar(200) NOT NULL,
+  `series` int(3) NOT NULL,
+  `shelf` int(11) NOT NULL,
+  `capacity` varchar(200) NOT NULL DEFAULT ' Borrowable',
+  `price` int(11) NOT NULL,
+  `add_date` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`serial_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `books`
+--
+
+LOCK TABLES `books` WRITE;
+/*!40000 ALTER TABLE `books` DISABLE KEYS */;
+INSERT INTO `books` VALUES ('s36356387762','english aid','peter keter','jfka',1,8,'Borrowable',450,'2019-07-20 14:21:14'),('s922134542','rich and the poor','waiganjo michael','JFKA',2,6,'Borrowable',450,'2019-07-19 12:00:19'),('s9227743536','java programing 2','walcot alva','jesco london',1,7,'Read indoors',2300,'2019-07-20 14:16:10');
+/*!40000 ALTER TABLE `books` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `issuebook`
+--
+
+DROP TABLE IF EXISTS `issuebook`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `issuebook` (
+  `serial_no` varchar(200) NOT NULL,
+  `book_name` varchar(200) NOT NULL,
+  `author` varchar(200) NOT NULL,
+  `series` int(11) NOT NULL,
+  `student_name` varchar(200) NOT NULL,
+  `admn_no` int(11) NOT NULL,
+  `stream` varchar(100) NOT NULL,
+  `borrow_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `to_return_in` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(200) NOT NULL DEFAULT 'out shelf',
+  `served_by` varchar(20) NOT NULL DEFAULT 'N/A',
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `issuebook`
+--
+
+LOCK TABLES `issuebook` WRITE;
+/*!40000 ALTER TABLE `issuebook` DISABLE KEYS */;
+INSERT INTO `issuebook` VALUES ('s922134542','rich and the poor','waiganjo michael',2,'benedict mutua',230,'west','2019-07-19 13:09:34',10,1,'returned','123',0),('s922134542','rich and the poor','waiganjo michael',2,'richard nzau',1,'west','2019-07-19 13:41:30',7,2,'out shelf','12345',0),('s922134542','rich and the poor','waiganjo michael',2,'benedict mutua',230,'west','2019-07-19 15:04:55',7,3,'returned','123',450),('s922134542','rich and the poor','waiganjo michael',2,'benedict mutua',230,'west','2019-07-19 16:12:52',7,4,'returned','123',450);
+/*!40000 ALTER TABLE `issuebook` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `students`
+--
+
+DROP TABLE IF EXISTS `students`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `students` (
+  `admno` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `class` int(1) NOT NULL,
+  `stream` varchar(100) DEFAULT NULL,
+  `term` int(11) NOT NULL,
+  `reg_date` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`admno`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `students`
+--
+
+LOCK TABLES `students` WRITE;
+/*!40000 ALTER TABLE `students` DISABLE KEYS */;
+INSERT INTO `students` VALUES (1,'richard nzau',1,'west',1,'2019-07-18 19:02:36'),(230,'benedict mutua',3,'west',2,'2019-07-18 18:59:14');
+/*!40000 ALTER TABLE `students` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-04-05 17:05:14
